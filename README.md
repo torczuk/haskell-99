@@ -1,5 +1,6 @@
 Run ghci
-```$ghci
+```
+$> ghci
 ...
 ```
 
