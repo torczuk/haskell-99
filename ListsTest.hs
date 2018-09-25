@@ -33,7 +33,13 @@ testPackOnNonMultiple = TestCase(assertEqual "pack ..." ["aaaa","b","cc","aa","d
 testEncodeOnNonMultiple = TestCase(assertEqual "encode [aaa bb cc a] == [(3, a), (2, b) (2, c) (1, c)]" [(3, 'a'), (2, 'b'), (2, 'c'), (1, 'a')] (encode ["aaa", "bb", "cc", "a"]))
 
 testDupliEmptyList = TestCase(assertBool "dupli [] = []" (null . dupli $ []))
-testEncodeNonEmptyList = TestCase(assertEqual "encode [a a b c] == [a a a a b b c c]" ['a', 'a', 'a', 'a', 'b', 'b', 'c', 'c'] (dupli ['a', 'a', 'b', 'c']))
+testDupliNonEmptyList = TestCase(assertEqual "dupli [a a b c] == [a a a a b b c c]" ['a', 'a', 'a', 'a', 'b', 'b', 'c', 'c'] (dupli ['a', 'a', 'b', 'c']))
+
+testRepliEmptyList = TestCase(assertBool "repli [] n = []" (null (repli [] 100)))
+testReplZero = TestCase(assertBool "repli [1 1 2] 0 = []" (null (repli [1..100] 0)))
+testRepliOnce = TestCase(assertEqual "repli [1 1 2] 1 = [1 1 2]" [1, 1, 2] (repli [1, 1, 2] 1))
+testRepliNonEmpty = TestCase(assertEqual "repli [1 1 2] 3 = [1 1 1 1 1 1 2 2 2]" [1, 1, 1, 1, 1, 1, 2, 2, 2] (repli [1, 1, 2] 3))
+
 
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
@@ -42,4 +48,6 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "myReverse suites" testMyReverseOnEmptyList, testMyReverseOnSingleton, testMyReverseOnAscList,
                   TestLabel "compress suites" testCompressOnEmpty, testCompressOnNonEmpty, testCompressTheSameElements,
                   TestLabel "pack suites" testPackOnSingleton, testPackOnNonMultiple,
-                  TestLabel "encode suites" testEncodeOnNonMultiple, testEncodeNonEmptyList]
+                  TestLabel "encode suites" testEncodeOnNonMultiple,
+                  TestLabel "dupli suites" testDupliEmptyList, testDupliNonEmptyList,
+                  TestLabel "repli suites" testRepliEmptyList, testReplZero, testRepliOnce, testRepliNonEmpty]

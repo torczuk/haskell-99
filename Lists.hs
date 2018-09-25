@@ -9,8 +9,10 @@ module Lists
   pack,
   encode,
   dupli,
+  repli,
 ) where
 
+-- 1
 myLast :: [a] -> a
 myLast []     = error "List can not be empty"
 myLast [h]    = h
@@ -59,6 +61,16 @@ pack (x:xs) = (x: takeWhile (== x) xs) : pack (dropWhile (== x) xs)
 encode :: [[b]] -> [(Int, b)]
 encode xs = map (\x -> (length x, head x)) xs
 
+-- 14th Duplicate the elements of a list.
 dupli :: [a] -> [a]
 dupli [] = []
 dupli (x:xs) = x: x: dupli xs
+
+
+-- 15th Replicate the elements of a list a given number of times
+repli :: [a] -> Int -> [a]
+repli [] _ = []
+repli (x:xs) n
+        | n < 1 = []
+        | otherwise  = replicated ++ (repli xs n)
+                        where replicated = map (\y -> x) [1..n]
