@@ -1,3 +1,5 @@
+Solving https://wiki.haskell.org/99_questions
+
 Run ghci
 ```
 $> ghci
