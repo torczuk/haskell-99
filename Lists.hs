@@ -7,7 +7,8 @@ module Lists
   isPalindrome,
   compress,
   pack,
-  encode
+  encode,
+  dupli,
 ) where
 
 myLast :: [a] -> a
@@ -57,3 +58,7 @@ pack (x:xs) = (x: takeWhile (== x) xs) : pack (dropWhile (== x) xs)
 
 encode :: [[b]] -> [(Int, b)]
 encode xs = map (\x -> (length x, head x)) xs
+
+dupli :: [a] -> [a]
+dupli [] = []
+dupli (x:xs) = x: x: dupli xs
