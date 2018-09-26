@@ -10,6 +10,8 @@ module Lists
   encode,
   dupli,
   repli,
+  Occurence(..),
+  encodeModified,
 ) where
 
 -- 1
@@ -60,6 +62,15 @@ pack (x:xs) = (x: takeWhile (== x) xs) : pack (dropWhile (== x) xs)
 
 encode :: [[b]] -> [(Int, b)]
 encode xs = map (\x -> (length x, head x)) xs
+
+-- 11th Modified run-length encoding.
+data Occurence a = Single a | Multiple a Int deriving (Show, Eq)
+encodeModified :: (Eq a) => [a] -> [Occurence a]
+-- encodeModified xs = map (\(f, s) -> if f == 1 then Single s else Multiple s f) . encode . pack $ xs
+encodeModified = map helper . encode . pack
+          where
+            helper (1, x) = Single x
+            helper (n, x) = Multiple x n
 
 -- 14th Duplicate the elements of a list.
 dupli :: [a] -> [a]

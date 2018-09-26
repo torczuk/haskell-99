@@ -32,6 +32,8 @@ testPackOnNonMultiple = TestCase(assertEqual "pack ..." ["aaaa","b","cc","aa","d
 
 testEncodeOnNonMultiple = TestCase(assertEqual "encode [aaa bb cc a] == [(3, a), (2, b) (2, c) (1, c)]" [(3, 'a'), (2, 'b'), (2, 'c'), (1, 'a')] (encode ["aaa", "bb", "cc", "a"]))
 
+testEncodeModifiedOnNonEmpty = TestCase (assertEqual "encodeModified ['a' 'a' 'b'] == [Multiple 2 'a', Single b]" [Multiple 'a' 2, Single 'b'] (encodeModified ['a', 'a', 'b']))
+
 testDupliEmptyList = TestCase(assertBool "dupli [] = []" (null . dupli $ []))
 testDupliNonEmptyList = TestCase(assertEqual "dupli [a a b c] == [a a a a b b c c]" ['a', 'a', 'a', 'a', 'b', 'b', 'c', 'c'] (dupli ['a', 'a', 'b', 'c']))
 
@@ -50,4 +52,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "pack suites" testPackOnSingleton, testPackOnNonMultiple,
                   TestLabel "encode suites" testEncodeOnNonMultiple,
                   TestLabel "dupli suites" testDupliEmptyList, testDupliNonEmptyList,
-                  TestLabel "repli suites" testRepliEmptyList, testReplZero, testRepliOnce, testRepliNonEmpty]
+                  TestLabel "repli suites" testRepliEmptyList, testReplZero, testRepliOnce, testRepliNonEmpty,
+                  TestLabel "encodeModified suites" testEncodeModifiedOnNonEmpty]
