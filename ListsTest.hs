@@ -46,6 +46,9 @@ testReplZero = TestCase(assertBool "repli [1 1 2] 0 = []" (null (repli [1..100] 
 testRepliOnce = TestCase(assertEqual "repli [1 1 2] 1 = [1 1 2]" [1, 1, 2] (repli [1, 1, 2] 1))
 testRepliNonEmpty = TestCase(assertEqual "repli [1 1 2] 3 = [1 1 1 1 1 1 2 2 2]" [1, 1, 1, 1, 1, 1, 2, 2, 2] (repli [1, 1, 2] 3))
 
+testDropFromSingleton = TestCase(assertBool "should drop from singleton" (null (drop'  [1] 1)))
+testDropFirstElement = TestCase(assertEqual "should drop first element from list" [2..10] (drop' [1..10] 1))
+testDropLastElement = TestCase(assertEqual "should drop last element from list" [1..9] (drop' [1..10] 10))
 
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
@@ -59,4 +62,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "repli suites" testRepliEmptyList, testReplZero, testRepliOnce, testRepliNonEmpty,
                   TestLabel "encodeModified suites" testEncodeModifiedOnNonEmpty,
                   TestLabel "decodeModified" testDecodeModified,
-                  TestLabel "encodeDirect" testEncodeDirect]
+                  TestLabel "encodeDirect" testEncodeDirect,
+                  TestLabel "drop" testDropFromSingleton, testDropFirstElement, testDropLastElement]
