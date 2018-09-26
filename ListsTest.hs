@@ -34,6 +34,10 @@ testEncodeOnNonMultiple = TestCase(assertEqual "encode [aaa bb cc a] == [(3, a),
 
 testEncodeModifiedOnNonEmpty = TestCase (assertEqual "encodeModified ['a' 'a' 'b'] == [Multiple 2 'a', Single b]" [Multiple 'a' 2, Single 'b'] (encodeModified ['a', 'a', 'b']))
 
+testDecodeModified = TestCase (assertEqual "should decodeModified for not empty list containing Single and Multiple" ['a', 'a', 'b'] (decodeModified [Multiple 'a' 2, Single 'b']))
+
+testEncodeDirect = TestCase(assertEqual "should encode direct non empty list" [Multiple 'a' 2, Single 'b', Single 'a'] (encodeDirect ['a', 'a', 'b', 'a']))
+
 testDupliEmptyList = TestCase(assertBool "dupli [] = []" (null . dupli $ []))
 testDupliNonEmptyList = TestCase(assertEqual "dupli [a a b c] == [a a a a b b c c]" ['a', 'a', 'a', 'a', 'b', 'b', 'c', 'c'] (dupli ['a', 'a', 'b', 'c']))
 
@@ -53,4 +57,6 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "encode suites" testEncodeOnNonMultiple,
                   TestLabel "dupli suites" testDupliEmptyList, testDupliNonEmptyList,
                   TestLabel "repli suites" testRepliEmptyList, testReplZero, testRepliOnce, testRepliNonEmpty,
-                  TestLabel "encodeModified suites" testEncodeModifiedOnNonEmpty]
+                  TestLabel "encodeModified suites" testEncodeModifiedOnNonEmpty,
+                  TestLabel "decodeModified" testDecodeModified,
+                  TestLabel "encodeDirect" testEncodeDirect]

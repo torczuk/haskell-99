@@ -12,6 +12,8 @@ module Lists
   repli,
   Occurence(..),
   encodeModified,
+  decodeModified,
+  encodeDirect,
 ) where
 
 -- 1
@@ -66,17 +68,37 @@ encode xs = map (\x -> (length x, head x)) xs
 -- 11th Modified run-length encoding.
 data Occurence a = Single a | Multiple a Int deriving (Show, Eq)
 encodeModified :: (Eq a) => [a] -> [Occurence a]
--- encodeModified xs = map (\(f, s) -> if f == 1 then Single s else Multiple s f) . encode . pack $ xs
 encodeModified = map helper . encode . pack
           where
             helper (1, x) = Single x
             helper (n, x) = Multiple x n
+
+-- 12th Decode a run-length encoded list.
+decodeModified :: (Eq a) => [Occurence a] -> [a]
+decodeModified =  foldl (++) [] . map helper
+          where
+            helper (Single x) = [x]
+            helper (Multiple x n) = replicate n x
 
 -- 14th Duplicate the elements of a list.
 dupli :: [a] -> [a]
 dupli [] = []
 dupli (x:xs) = x: x: dupli xs
 
+--13th Run-length encoding of a list (direct solution). Without creating sublist
+encode' :: (Eq a) => [a] -> [(Int, a)]
+encode' = foldr helper []
+        where
+          helper e [] = [(1, e)]
+          helper e (x@(n,c):xs) =
+            if e == c then (n + 1, c):xs
+            else (1, e):x:xs
+
+encodeDirect :: (Eq a) => [a] -> [Occurence a]
+encodeDirect xs = map helper (encode' xs)
+          where
+            helper (1, a) = Single a
+            helper (n, a) = Multiple a n
 
 -- 15th Replicate the elements of a list a given number of times
 repli :: [a] -> Int -> [a]
