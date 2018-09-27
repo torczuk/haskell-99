@@ -50,12 +50,17 @@ testDropFromSingleton = TestCase(assertBool "should drop from singleton" (null (
 testDropFirstElement = TestCase(assertEqual "should drop first element from list" [2..10] (drop' [1..10] 1))
 testDropLastElement = TestCase(assertEqual "should drop last element from list" [1..9] (drop' [1..10] 10))
 
+testSplitingForNegativeIndex = TestCase(assertEqual "should split list in two" [[],[1..10]] (split [1..10] (-1)))
+testSplitingNotEmptyListForFirstIndex = TestCase(assertEqual "should split list in two" [[1],[2..10]] (split [1..10] 1))
+testSplitingNotEmptyListBasedOnMiddleIndex = TestCase(assertEqual "should split list in two" [[1..5], [6..10]] (split [1..10] 5))
+
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
                   TestLabel "elementAt suites" testElementAtFirstElement, testElementAtLastElement,
                   TestLabel "myLength suites" testMyLengthOnEmptyList, testMyLengthOnNonEmptyList,
                   TestLabel "myReverse suites" testMyReverseOnEmptyList, testMyReverseOnSingleton, testMyReverseOnAscList,
                   TestLabel "compress suites" testCompressOnEmpty, testCompressOnNonEmpty, testCompressTheSameElements,
+                  TestLabel "palindrome" testIsPalindromeForEmpty, testIsPalindromeFoSinleton, testIsPalindromeForPalindrome, testIsPalindromeForNonPalindrome,
                   TestLabel "pack suites" testPackOnSingleton, testPackOnNonMultiple,
                   TestLabel "encode suites" testEncodeOnNonMultiple,
                   TestLabel "dupli suites" testDupliEmptyList, testDupliNonEmptyList,
@@ -63,4 +68,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "encodeModified suites" testEncodeModifiedOnNonEmpty,
                   TestLabel "decodeModified" testDecodeModified,
                   TestLabel "encodeDirect" testEncodeDirect,
-                  TestLabel "drop" testDropFromSingleton, testDropFirstElement, testDropLastElement]
+                  TestLabel "drop" testDropFromSingleton, testDropFirstElement, testDropLastElement,
+                  TestLabel "split" testSplitingForNegativeIndex, testSplitingNotEmptyListForFirstIndex, testSplitingNotEmptyListBasedOnMiddleIndex]

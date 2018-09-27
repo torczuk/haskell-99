@@ -15,6 +15,7 @@ module Lists
   decodeModified,
   encodeDirect,
   drop',
+  split,
 ) where
 
 -- 1
@@ -116,3 +117,11 @@ drop' (x:xs) 1 = xs
 drop' (x:xs) n
       | n < 1 = error "Index Out of Bound"
       | otherwise = x: drop' xs (n - 1)
+
+-- 17th Split a list into two ]parts; the length of the first part is given.
+split :: [a] -> Int -> [[a]]
+split xs n = [first, second]
+      where
+        indexed = zip [1..] xs
+        first = map snd . filter (\ (i, e) -> i <= n) $ indexed
+        second = map snd . filter (\ (i, e) -> i > n) $ indexed
