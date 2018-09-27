@@ -14,9 +14,10 @@ module Lists
   encodeModified,
   decodeModified,
   encodeDirect,
-  drop',
+  dropEvery,
   split,
   slice,
+  removeAt,
 ) where
 
 -- 1
@@ -111,13 +112,9 @@ repli (x:xs) n
         | otherwise  = replicated ++ (repli xs n)
                         where replicated = map (\y -> x) [1..n]
 
-
 -- 16th Drop every N'th element from a list.
-drop' :: [a] -> Int -> [a]
-drop' (x:xs) 1 = xs
-drop' (x:xs) n
-      | n < 1 = error "Index Out of Bound"
-      | otherwise = x: drop' xs (n - 1)
+dropEvery :: [a] -> Int -> [a]
+dropEvery xs n = map snd . filter (\ (f, _) -> f `mod` n /= 0 ) $ zip [1..] xs
 
 -- 17th Split a list into two ]parts; the length of the first part is given.
 split :: [a] -> Int -> [[a]]
@@ -133,3 +130,11 @@ slice xs from to
   | from > to = error "Condition from <= to not fullfilled"
   | otherwise = (split sliced (from - 1)) !! 1
                   where sliced = (split xs to) !! 0
+
+
+-- 20th Drop every N'th element from a list.
+removeAt :: Int -> [a] -> [a]
+removeAt 1 (x:xs) = xs
+removeAt n (x:xs)
+  | n < 1 = error "Index Out of Bound"
+  | otherwise = x: removeAt (n - 1) xs

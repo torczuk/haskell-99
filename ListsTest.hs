@@ -46,9 +46,9 @@ testReplZero = TestCase(assertBool "repli [1 1 2] 0 = []" (null (repli [1..100] 
 testRepliOnce = TestCase(assertEqual "repli [1 1 2] 1 = [1 1 2]" [1, 1, 2] (repli [1, 1, 2] 1))
 testRepliNonEmpty = TestCase(assertEqual "repli [1 1 2] 3 = [1 1 1 1 1 1 2 2 2]" [1, 1, 1, 1, 1, 1, 2, 2, 2] (repli [1, 1, 2] 3))
 
-testDropFromSingleton = TestCase(assertBool "should drop from singleton" (null (drop'  [1] 1)))
-testDropFirstElement = TestCase(assertEqual "should drop first element from list" [2..10] (drop' [1..10] 1))
-testDropLastElement = TestCase(assertEqual "should drop last element from list" [1..9] (drop' [1..10] 10))
+testDropEmptyList = TestCase(assertBool "should return empty when dropping from empty list" (null (dropEvery [] 10)))
+testDropAllElements = TestCase(assertBool "should return empty when dropping every 1 list" (null (dropEvery [1..10] 1)))
+testDropAllOdds = TestCase(assertEqual "should return even numbers after dropping odds" [1,3..9] (dropEvery [1..10] 2))
 
 testSplitingForNegativeIndex = TestCase(assertEqual "should split list in two" [[],[1..10]] (split [1..10] (-1)))
 testSplitingNotEmptyListForFirstIndex = TestCase(assertEqual "should split list in two" [[1],[2..10]] (split [1..10] 1))
@@ -57,6 +57,10 @@ testSplitingNotEmptyListBasedOnMiddleIndex = TestCase(assertEqual "should split 
 testSliceEmptyList = TestCase (assertBool "should split empty list to empty list" (null (slice [] 2 3)))
 testSliceSublist = TestCase (assertEqual "should split not empty list" [2..10] (slice [1..12] 2 10))
 testSliceSingleSublist = TestCase (assertEqual "should split not empty list" [2] (slice [1..12] 2 2))
+
+testRemoveAtFromSingleton = TestCase(assertBool "should remove from singleton" (null (removeAt 1 [1])))
+testRemoveAtElement = TestCase(assertEqual "should remove first element from list" [2..10] (removeAt 1 [1..10]))
+testRemoveAtLastElement = TestCase(assertEqual "should remove last element from list" [1..9] (removeAt 10 [1..10]))
 
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
@@ -72,6 +76,7 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "encodeModified suites" testEncodeModifiedOnNonEmpty,
                   TestLabel "decodeModified" testDecodeModified,
                   TestLabel "encodeDirect" testEncodeDirect,
-                  TestLabel "drop" testDropFromSingleton, testDropFirstElement, testDropLastElement,
+                  TestLabel "dropEvery" testDropEmptyList, testDropAllElements, testDropAllOdds,
                   TestLabel "split" testSplitingForNegativeIndex, testSplitingNotEmptyListForFirstIndex, testSplitingNotEmptyListBasedOnMiddleIndex,
-                  TestLabel "slice" testSliceEmptyList, testSliceSublist, testSliceSingleSublist]
+                  TestLabel "slice" testSliceEmptyList, testSliceSublist, testSliceSingleSublist,
+                  TestLabel "removeAt" testRemoveAtFromSingleton, testRemoveAtElement, testRemoveAtLastElement]
