@@ -16,6 +16,7 @@ module Lists
   encodeDirect,
   drop',
   split,
+  slice,
 ) where
 
 -- 1
@@ -125,3 +126,10 @@ split xs n = [first, second]
         indexed = zip [1..] xs
         first = map snd . filter (\ (i, e) -> i <= n) $ indexed
         second = map snd . filter (\ (i, e) -> i > n) $ indexed
+
+-- 18th  Extract a slice from a list.
+slice :: [a] -> Int -> Int -> [a]
+slice xs from to
+  | from > to = error "Condition from <= to not fullfilled"
+  | otherwise = (split sliced (from - 1)) !! 1
+                  where sliced = (split xs to) !! 0
