@@ -55,7 +55,8 @@ testSplitingNotEmptyListForFirstIndex = TestCase(assertEqual "should split list 
 testSplitingNotEmptyListBasedOnMiddleIndex = TestCase(assertEqual "should split list in two" [[1..5], [6..10]] (split [1..10] 5))
 
 testSliceEmptyList = TestCase (assertBool "should split empty list to empty list" (null (slice [] 2 3)))
-testSliceNonEmptyList = TestCase (assertEqual "should split not empty list" [2..10] (slice [1..12] 2 10))
+testSliceSublist = TestCase (assertEqual "should split not empty list" [2..10] (slice [1..12] 2 10))
+testSliceSingleSublist = TestCase (assertEqual "should split not empty list" [2] (slice [1..12] 2 2))
 
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
@@ -73,4 +74,4 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "encodeDirect" testEncodeDirect,
                   TestLabel "drop" testDropFromSingleton, testDropFirstElement, testDropLastElement,
                   TestLabel "split" testSplitingForNegativeIndex, testSplitingNotEmptyListForFirstIndex, testSplitingNotEmptyListBasedOnMiddleIndex,
-                  TestLabel "slice" testSliceEmptyList, testSliceNonEmptyList]
+                  TestLabel "slice" testSliceEmptyList, testSliceSublist, testSliceSingleSublist]
