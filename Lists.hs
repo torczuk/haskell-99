@@ -19,6 +19,7 @@ module Lists
   slice,
   removeAt,
   rotate,
+  insertAt,
 ) where
 
 -- 1
@@ -147,3 +148,10 @@ removeAt 1 (x:xs) = xs
 removeAt n (x:xs)
   | n < 1 = error "Index Out of Bound"
   | otherwise = x: removeAt (n - 1) xs
+
+-- 21st Insert an element at a given position into a list.
+insertAt :: a -> [a] -> Int -> [a]
+insertAt y xs 1 = y: xs
+insertAt y (x:xs) n
+          | n > 0     = x : insertAt y xs (n - 1)
+          | otherwise = error "Index Out of Bound"

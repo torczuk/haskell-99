@@ -65,6 +65,10 @@ testRemoveAtFromSingleton = TestCase(assertBool "should remove from singleton" (
 testRemoveAtElement = TestCase(assertEqual "should remove first element from list" [2..10] (removeAt 1 [1..10]))
 testRemoveAtLastElement = TestCase(assertEqual "should remove last element from list" [1..9] (removeAt 10 [1..10]))
 
+testInsertAtEmptyList = TestCase(assertEqual "should insert at empty array" "a" (insertAt 'a' [] 1))
+testInsertAtTheBeginning = TestCase(assertEqual "should insert at the beginning" "abcd" (insertAt 'a' "bcd" 1))
+testInsertAtTheEnd = TestCase(assertEqual "should insert at the end" "abcde" (insertAt 'e' "abcd" 5))
+
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
                   TestLabel "elementAt suites" testElementAtFirstElement, testElementAtLastElement,
@@ -83,4 +87,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "split" testSplitingForNegativeIndex, testSplitingNotEmptyListForFirstIndex, testSplitingNotEmptyListBasedOnMiddleIndex,
                   TestLabel "slice" testSliceEmptyList, testSliceSublist, testSliceSingleSublist,
                   TestLabel "removeAt" testRemoveAtFromSingleton, testRemoveAtElement, testRemoveAtLastElement,
-                  TestLabel "rotate" testRotatePositiveOffset, testRotateNegativeOffset]
+                  TestLabel "rotate" testRotatePositiveOffset, testRotateNegativeOffset,
+                  TestLabel "insertAt" testInsertAtEmptyList, testInsertAtTheBeginning, testInsertAtTheEnd]
