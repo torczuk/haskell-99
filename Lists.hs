@@ -20,6 +20,7 @@ module Lists
   removeAt,
   rotate,
   insertAt,
+  range,
 ) where
 
 -- 1
@@ -129,7 +130,7 @@ split xs n = [first, second]
 -- 18th  Extract a slice from a list.
 slice :: [a] -> Int -> Int -> [a]
 slice xs from to
-  | from > to = error "Condition from <= to not fullfilled"
+  | from > to = error "Condition from <= to not fulfilled"
   | otherwise = (split sliced (from - 1)) !! 1
                   where sliced = (split xs to) !! 0
 
@@ -155,3 +156,9 @@ insertAt y xs 1 = y: xs
 insertAt y (x:xs) n
           | n > 0     = x : insertAt y xs (n - 1)
           | otherwise = error "Index Out of Bound"
+
+
+range :: Int -> Int -> [Int]
+range n m
+    | n <= m    = n: range (n + 1) m
+    | otherwise = []

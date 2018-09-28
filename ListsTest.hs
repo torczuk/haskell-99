@@ -69,6 +69,10 @@ testInsertAtEmptyList = TestCase(assertEqual "should insert at empty array" "a" 
 testInsertAtTheBeginning = TestCase(assertEqual "should insert at the beginning" "abcd" (insertAt 'a' "bcd" 1))
 testInsertAtTheEnd = TestCase(assertEqual "should insert at the end" "abcde" (insertAt 'e' "abcd" 5))
 
+testRangeForInvalidRange = TestCase(assertBool "should construct empty range when from > to" (null (range 2 1)))
+testRangeForSingleton = TestCase(assertEqual "should construct singleton range" [8] (range 8 8))
+testRange = TestCase(assertEqual "should construct from .. to range" [10..20] (range 10 20))
+
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
                   TestLabel "elementAt suites" testElementAtFirstElement, testElementAtLastElement,
@@ -88,4 +92,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "slice" testSliceEmptyList, testSliceSublist, testSliceSingleSublist,
                   TestLabel "removeAt" testRemoveAtFromSingleton, testRemoveAtElement, testRemoveAtLastElement,
                   TestLabel "rotate" testRotatePositiveOffset, testRotateNegativeOffset,
-                  TestLabel "insertAt" testInsertAtEmptyList, testInsertAtTheBeginning, testInsertAtTheEnd]
+                  TestLabel "insertAt" testInsertAtEmptyList, testInsertAtTheBeginning, testInsertAtTheEnd,
+                  TestLabel "range" testRangeForInvalidRange, testRangeForSingleton, testRange]
