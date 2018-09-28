@@ -58,6 +58,9 @@ testSliceEmptyList = TestCase (assertBool "should split empty list to empty list
 testSliceSublist = TestCase (assertEqual "should split not empty list" [2..10] (slice [1..12] 2 10))
 testSliceSingleSublist = TestCase (assertEqual "should split not empty list" [2] (slice [1..12] 2 2))
 
+testRotatePositiveOffset = TestCase(assertEqual "should rotate with positive offset" "defghabc" (rotate ['a','b','c','d','e','f','g','h'] 3))
+testRotateNegativeOffset = TestCase(assertEqual "should rotate with negative offset" "ghabcdef" (rotate ['a','b','c','d','e','f','g','h'] (-2)))
+
 testRemoveAtFromSingleton = TestCase(assertBool "should remove from singleton" (null (removeAt 1 [1])))
 testRemoveAtElement = TestCase(assertEqual "should remove first element from list" [2..10] (removeAt 1 [1..10]))
 testRemoveAtLastElement = TestCase(assertEqual "should remove last element from list" [1..9] (removeAt 10 [1..10]))
@@ -79,4 +82,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "dropEvery" testDropEmptyList, testDropAllElements, testDropAllOdds,
                   TestLabel "split" testSplitingForNegativeIndex, testSplitingNotEmptyListForFirstIndex, testSplitingNotEmptyListBasedOnMiddleIndex,
                   TestLabel "slice" testSliceEmptyList, testSliceSublist, testSliceSingleSublist,
-                  TestLabel "removeAt" testRemoveAtFromSingleton, testRemoveAtElement, testRemoveAtLastElement]
+                  TestLabel "removeAt" testRemoveAtFromSingleton, testRemoveAtElement, testRemoveAtLastElement,
+                  TestLabel "rotate" testRotatePositiveOffset, testRotateNegativeOffset]

@@ -18,6 +18,7 @@ module Lists
   split,
   slice,
   removeAt,
+  rotate,
 ) where
 
 -- 1
@@ -131,6 +132,14 @@ slice xs from to
   | otherwise = (split sliced (from - 1)) !! 1
                   where sliced = (split xs to) !! 0
 
+-- 19th Rotate a list N places to the left.
+
+rotate :: [a] -> Int -> [a]
+rotate xs n = (splited !! 1) ++ (splited !! 0)
+    where
+      size  = length xs
+      index = if n < 0 then size + n else n
+      splited = split xs index
 
 -- 20th Drop every N'th element from a list.
 removeAt :: Int -> [a] -> [a]
