@@ -23,6 +23,10 @@ module Lists
   range,
 ) where
 
+import System.Random (getStdGen, randomRs)
+
+-- import System.Random
+
 -- 1
 myLast :: [a] -> a
 myLast []     = error "List can not be empty"
@@ -158,7 +162,14 @@ insertAt y (x:xs) n
           | otherwise = error "Index Out of Bound"
 
 
+-- 22nd
 range :: Int -> Int -> [Int]
 range n m
     | n <= m    = n: range (n + 1) m
     | otherwise = []
+
+
+rndSelect :: [a] -> Int -> IO [a]
+rndSelect xs n = do
+          gen <- getStdGen
+          return $ take n [xs !! x | x <- randomRs (0, (length xs) - 1) gen]
