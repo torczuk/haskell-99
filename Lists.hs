@@ -21,9 +21,10 @@ module Lists
   rotate,
   insertAt,
   range,
+  diffSelect,
 ) where
 
-import System.Random (getStdGen, randomRs)
+import System.Random (getStdGen, randomRs, randomRIO)
 
 -- import System.Random
 
@@ -162,14 +163,28 @@ insertAt y (x:xs) n
           | otherwise = error "Index Out of Bound"
 
 
--- 22nd
+-- 22nd Create a list containing all integers within a given range.
 range :: Int -> Int -> [Int]
 range n m
     | n <= m    = n: range (n + 1) m
     | otherwise = []
 
 
+-- 23rd Extract a given number of randomly selected elements from a list.
 rndSelect :: [a] -> Int -> IO [a]
 rndSelect xs n = do
           gen <- getStdGen
           return $ take n [xs !! x | x <- randomRs (0, (length xs) - 1) gen]
+
+
+--24th Lotto: Draw N different random numbers from the set 1..M.
+diffSelect :: Int -> Int -> IO [Int]
+diffSelect s n = diffSelect' s [1..n]
+
+diffSelect' 0 _ = return []
+diffSelect' _ [] = return []
+diffSelect' s xs = do
+                    r <- randomRIO (0, (length xs) - 1)
+                    let remain = take r xs ++ drop (r + 1) xs
+                    rest <- diffSelect' (s - 1) remain
+                    return ((xs !! r) : rest)
