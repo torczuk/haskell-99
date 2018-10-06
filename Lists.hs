@@ -22,6 +22,7 @@ module Lists
   insertAt,
   range,
   diffSelect,
+  -- rndPermu,
 ) where
 
 import System.Random (getStdGen, randomRs, randomRIO)
@@ -188,3 +189,7 @@ diffSelect' s xs = do
                     let remain = take r xs ++ drop (r + 1) xs
                     rest <- diffSelect' (s - 1) remain
                     return ((xs !! r) : rest)
+
+-- 25th Generate a random permutation of the elements of a list.
+rndPermu :: [a] -> IO [a]
+rndPermu xs = diffSelect' (length xs) xs
