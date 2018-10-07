@@ -22,7 +22,8 @@ module Lists
   insertAt,
   range,
   diffSelect,
-  -- rndPermu,
+  rndPermu,
+  combinations,
 ) where
 
 import System.Random (getStdGen, randomRs, randomRIO)
@@ -193,3 +194,10 @@ diffSelect' s xs = do
 -- 25th Generate a random permutation of the elements of a list.
 rndPermu :: [a] -> IO [a]
 rndPermu xs = diffSelect' (length xs) xs
+
+
+-- 26th Generate the combinations of K distinct objects chosen from the N elements of a list
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _ = [[]]
+combinations _ [] = []
+combinations n (x:xs) = ( map (x:) $ combinations (n - 1) xs) ++ (combinations n xs)

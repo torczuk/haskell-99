@@ -73,6 +73,9 @@ testRangeForInvalidRange = TestCase(assertBool "should construct empty range whe
 testRangeForSingleton = TestCase(assertEqual "should construct singleton range" [8] (range 8 8))
 testRange = TestCase(assertEqual "should construct from .. to range" [10..20] (range 10 20))
 
+testCombinationsOnSingleton = TestCase(assertEqual "should return combinations over" ["a"] (combinations 1 "a"))
+testCombinations = TestCase(assertEqual "should return 3 lenght combinations over set of elements" ["abc", "abd", "acd", "bcd"] (combinations 3 "abcd"))
+
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
                   TestLabel "elementAt suites" testElementAtFirstElement, testElementAtLastElement,
@@ -93,4 +96,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "removeAt" testRemoveAtFromSingleton, testRemoveAtElement, testRemoveAtLastElement,
                   TestLabel "rotate" testRotatePositiveOffset, testRotateNegativeOffset,
                   TestLabel "insertAt" testInsertAtEmptyList, testInsertAtTheBeginning, testInsertAtTheEnd,
-                  TestLabel "range" testRangeForInvalidRange, testRangeForSingleton, testRange]
+                  TestLabel "range" testRangeForInvalidRange, testRangeForSingleton, testRange,
+                  TestLabel "combinations" testCombinationsOnSingleton, testCombinations]
