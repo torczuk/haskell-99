@@ -24,11 +24,12 @@ module Lists
   diffSelect,
   rndPermu,
   combinations,
-  group
+  group,
+  lsort
 ) where
 
 import System.Random (getStdGen, randomRs, randomRIO)
-import Data.List ((\\))
+import Data.List ((\\), sortBy)
 
 -- import System.Random
 
@@ -213,3 +214,7 @@ group (n:ns) x = [ f ++ s | f <- group [n] x, s <- group ns ( x \\ (flatten' f))
 
 flatten' :: [[a]] -> [a]
 flatten' xs = (\z n -> foldr (\x y -> foldr z y x) n xs) (:) []
+
+-- 28th Sorting a list of lists according to length of sublists
+lsort :: [[a]] -> [[a]]
+lsort = sortBy (\a b -> length a `compare` length b)

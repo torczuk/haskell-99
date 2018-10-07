@@ -78,6 +78,8 @@ testCombinations = TestCase(assertEqual "should return 3 lenght combinations ove
 
 testGroup = TestCase(assertEqual "should all combinations of unique group" 1260 (length (Lists.group [2,3,4] ["aldo","beat","carla","david","evi","flip","gary","hugo","ida"])))
 
+testLSort = TestCase(assertEqual "should sort list by length" ["o","de","de","mn","abc","fgh","ijkl"] (lsort ["abc","de","fgh","de","ijkl","mn","o"]))
+
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
                   TestLabel "elementAt suites" testElementAtFirstElement, testElementAtLastElement,
@@ -100,4 +102,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "insertAt" testInsertAtEmptyList, testInsertAtTheBeginning, testInsertAtTheEnd,
                   TestLabel "range" testRangeForInvalidRange, testRangeForSingleton, testRange,
                   TestLabel "combinations" testCombinationsOnSingleton, testCombinations,
-                  TestLabel "group" testGroup]
+                  TestLabel "group" testGroup,
+                  TestLabel "lsort" testLSort]
