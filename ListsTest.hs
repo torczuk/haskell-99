@@ -76,6 +76,8 @@ testRange = TestCase(assertEqual "should construct from .. to range" [10..20] (r
 testCombinationsOnSingleton = TestCase(assertEqual "should return combinations over" ["a"] (combinations 1 "a"))
 testCombinations = TestCase(assertEqual "should return 3 lenght combinations over set of elements" ["abc", "abd", "acd", "bcd"] (combinations 3 "abcd"))
 
+testGroup = TestCase(assertEqual "should all combinations of unique group" 1260 (length (Lists.group [2,3,4] ["aldo","beat","carla","david","evi","flip","gary","hugo","ida"])))
+
 tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSingleton,
                   TestLabel "butLast suites" testButLastTwoElements, testButLastMoveThanTwoElements,
                   TestLabel "elementAt suites" testElementAtFirstElement, testElementAtLastElement,
@@ -97,4 +99,5 @@ tests = TestList [TestLabel "myLast suites" testMyLastSingleton, testMyLastNotSi
                   TestLabel "rotate" testRotatePositiveOffset, testRotateNegativeOffset,
                   TestLabel "insertAt" testInsertAtEmptyList, testInsertAtTheBeginning, testInsertAtTheEnd,
                   TestLabel "range" testRangeForInvalidRange, testRangeForSingleton, testRange,
-                  TestLabel "combinations" testCombinationsOnSingleton, testCombinations]
+                  TestLabel "combinations" testCombinationsOnSingleton, testCombinations,
+                  TestLabel "group" testGroup]

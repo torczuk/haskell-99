@@ -24,9 +24,11 @@ module Lists
   diffSelect,
   rndPermu,
   combinations,
+  group
 ) where
 
 import System.Random (getStdGen, randomRs, randomRIO)
+import Data.List ((\\))
 
 -- import System.Random
 
@@ -201,3 +203,13 @@ combinations :: Int -> [a] -> [[a]]
 combinations 0 _ = [[]]
 combinations _ [] = []
 combinations n (x:xs) = ( map (x:) $ combinations (n - 1) xs) ++ (combinations n xs)
+
+-- 27th Group the elements of a set into disjoint subsets.
+group :: [Int] -> [String] -> [[[String]]]
+group [] _ = [[[]]]
+group _ [] = [[[]]]
+group [n] x = [[c] | c <- combinations n x]
+group (n:ns) x = [ f ++ s | f <- group [n] x, s <- group ns ( x \\ (flatten' f)) ]
+
+flatten' :: [[a]] -> [a]
+flatten' xs = (\z n -> foldr (\x y -> foldr z y x) n xs) (:) []
