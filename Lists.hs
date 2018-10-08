@@ -25,7 +25,8 @@ module Lists
   rndPermu,
   combinations,
   group,
-  lsort
+  lsort,
+  lfsort,
 ) where
 
 import System.Random (getStdGen, randomRs, randomRIO)
@@ -218,3 +219,7 @@ flatten' xs = (\z n -> foldr (\x y -> foldr z y x) n xs) (:) []
 -- 28th Sorting a list of lists according to length of sublists
 lsort :: [[a]] -> [[a]]
 lsort = sortBy (\a b -> length a `compare` length b)
+
+lfsort :: [[a]] -> [[a]]
+lfsort l = sortBy (\xs ys -> compare (frequency (length xs) l) (frequency (length ys) l)) l
+frequency len l = length (filter (\x -> length x == len) l)
