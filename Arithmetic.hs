@@ -1,5 +1,6 @@
 module  Arithmetic
 ( isPrime,
+  gcd',
 ) where
 
 --31. Determine whether a given integer number is prime.
@@ -10,3 +11,11 @@ primes = primes' 2
 isPrime :: Int -> Bool
 isPrime 1 = False
 isPrime n = length (filter (\p -> p == n) $ takeWhile (\p -> p <= n) $ primes) == 1
+
+gcd' :: Int -> Int -> Int
+gcd' a b
+      | a < b = gcd' b a
+      | mod a b == 0 = b
+      | otherwise = gcd' b r
+          where
+            r = mod a b
