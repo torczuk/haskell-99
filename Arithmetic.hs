@@ -12,6 +12,7 @@ isPrime :: Int -> Bool
 isPrime 1 = False
 isPrime n = length (filter (\p -> p == n) $ takeWhile (\p -> p <= n) $ primes) == 1
 
+--32. GCD
 gcd' :: Int -> Int -> Int
 gcd' a b
       | a < b = gcd' b a
