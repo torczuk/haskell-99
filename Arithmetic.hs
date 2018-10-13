@@ -2,6 +2,7 @@ module  Arithmetic
 ( isPrime,
   gcd',
   coprime,
+  totientPhi,
 ) where
 
 --31. Determine whether a given integer number is prime.
@@ -24,3 +25,8 @@ gcd' a b
 
 coprime :: Int -> Int -> Bool
 coprime a b = 1 == gcd' a b
+
+
+totientPhi :: Int -> Int
+totientPhi 1 = 1
+totientPhi n = length $ filter (\x -> coprime n x) [1 .. n - 1]

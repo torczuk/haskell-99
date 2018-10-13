@@ -9,7 +9,9 @@ testGCD1 = TestCase(assertEqual "great common division of 20 18 is 2" 2 (gcd' 20
 testGCD2 = TestCase(assertEqual "great common division of prime and non prime is 1" 1 (gcd' 991 91))
 testCoPrime = TestCase(assertBool "35 and 64 are coprime" (coprime 35 64))
 testAreNotCoPrime = TestCase(assertBool "35 and 15 are not coprime" (not (coprime 35 15)))
+testTotient = TestCase(assertEqual "number of coprime with 10 are 4" 4 (totientPhi 10))
 
 tests = TestList [TestLabel "isPrime" testThat2IsPrime, testThat199IsPrime, testThat991IsPrime, testThat993IsNotPrime,
                   TestLabel "gcd" testGCD1, testGCD2,
-                  TestLabel "coprime" testCoPrime, testAreNotCoPrime]
+                  TestLabel "coprime" testCoPrime, testAreNotCoPrime,
+                  TestLabel "totient-phi" testTotient]
