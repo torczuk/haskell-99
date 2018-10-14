@@ -3,10 +3,11 @@ module  Arithmetic
   gcd',
   coprime,
   totientPhi,
+  primeFactors,
 ) where
 
 --31. Determine whether a given integer number is prime.
-primes :: (Integral a) =>   [a]
+primes :: (Integral a) =>  [a]
 primes = primes' 2
       where primes' x = x: filter (\p -> p `mod` x /= 0) (primes' $ x+1)
 
@@ -26,7 +27,14 @@ gcd' a b
 coprime :: Int -> Int -> Bool
 coprime a b = 1 == gcd' a b
 
-
 totientPhi :: Int -> Int
 totientPhi 1 = 1
 totientPhi n = length $ filter (\x -> coprime n x) [1 .. n - 1]
+
+primeFactors :: Int -> [Int]
+primeFactors n
+  | n == 0    = []
+  | n == 1    = []
+  | isPrime n = [n]
+  | otherwise = first : primeFactors(quot n first)
+    where first = head $ filter (\p -> mod n p == 0) $ takeWhile (\p -> p <= n) $ primes
