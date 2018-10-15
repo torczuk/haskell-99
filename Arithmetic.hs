@@ -4,6 +4,7 @@ module  Arithmetic
   coprime,
   totientPhi,
   primeFactors,
+  primeMultiFactors,
 ) where
 
 --31. Determine whether a given integer number is prime.
@@ -38,3 +39,9 @@ primeFactors n
   | isPrime n = [n]
   | otherwise = first : primeFactors(quot n first)
     where first = head $ filter (\p -> mod n p == 0) $ takeWhile (\p -> p <= n) $ primes
+
+primeMultiFactors :: Int -> [(Int, Int)]
+primeMultiFactors n = foldr agg []  (primeFactors n)
+                where
+                  agg e [] = [(e, 1)]
+                  agg e (x:xs) = if (fst x) == e then (e, (snd x) + 1)  :xs else (e, 1) :x :xs
