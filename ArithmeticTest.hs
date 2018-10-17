@@ -14,10 +14,12 @@ testPrimeFactorsOfPrime = TestCase(assertEqual "prime factors of prime should be
 testPrimeFactorsOfNotPrime = TestCase(assertEqual "prime factors of not prime" [3, 3, 5, 7] (primeFactors 315))
 testPrimeMultiFactorOfPrime = TestCase(assertEqual "prime factors of prime should be prime" [(991, 1)] (primeMultiFactors 991))
 testPrimeMultiFactor = TestCase(assertEqual "prime multi factors of not prime" [(3, 2), (5, 1), (7, 1)] (primeMultiFactors 315))
+testPrimeRange = TestCase(assertEqual "prime between 10 and 20" [11,13,17,19] (primeR 10 20))
 
 tests = TestList [TestLabel "isPrime" testThat2IsPrime, testThat199IsPrime, testThat991IsPrime, testThat993IsNotPrime,
                   TestLabel "gcd" testGCD1, testGCD2,
                   TestLabel "coprime" testCoPrime, testAreNotCoPrime,
                   TestLabel "totient-phi" testTotient,
                   TestLabel "primeFactors" testPrimeFactorsOfPrime, testPrimeFactorsOfNotPrime,
-                  TestLabel "primeMultiFactors" testPrimeMultiFactorOfPrime, testPrimeMultiFactor]
+                  TestLabel "primeMultiFactors" testPrimeMultiFactorOfPrime, testPrimeMultiFactor,
+                  TestLabel "primeR" testPrimeRange]

@@ -5,6 +5,7 @@ module  Arithmetic
   totientPhi,
   primeFactors,
   primeMultiFactors,
+  primeR,
 ) where
 
 --31. Determine whether a given integer number is prime.
@@ -45,3 +46,7 @@ primeMultiFactors n = foldr agg []  (primeFactors n)
                 where
                   agg e [] = [(e, 1)]
                   agg e (x:xs) = if (fst x) == e then (e, (snd x) + 1)  :xs else (e, 1) :x :xs
+
+
+primeR :: Integral a => a -> a -> [a]
+primeR up down = takeWhile (\p -> p <= down) $ dropWhile (\p -> p <= up) $ primes
