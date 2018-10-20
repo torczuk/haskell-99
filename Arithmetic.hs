@@ -58,6 +58,9 @@ phi n = foldl formula 1 $ primeMultiFactors n
         where
           formula result (prime, multi) = result * (prime - 1) * prime ^ (multi - 1)
 
--- 39. A list of prime numbers. 
+-- 38.  Compare the two methods of calculating Euler's totient function.
+-- no solution needed
+
+-- 39. A list of prime numbers.
 primeR :: Integral a => a -> a -> [a]
 primeR up down = takeWhile (\p -> p <= down) $ dropWhile (\p -> p <= up) $ primes
