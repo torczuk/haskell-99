@@ -6,6 +6,7 @@ module  Arithmetic
   primeFactors,
   primeMultiFactors,
   primeR,
+  phi,
 ) where
 
 --31. Determine whether a given integer number is prime.
@@ -47,6 +48,10 @@ primeMultiFactors n = foldr agg []  (primeFactors n)
                   agg e [] = [(e, 1)]
                   agg e (x:xs) = if (fst x) == e then (e, (snd x) + 1)  :xs else (e, 1) :x :xs
 
+phi:: Int -> Int
+phi n = foldl formula 1 $ primeMultiFactors n
+        where
+          formula result (prime, multi) = result * (prime - 1) * prime ^ (multi - 1)
 
 primeR :: Integral a => a -> a -> [a]
 primeR up down = takeWhile (\p -> p <= down) $ dropWhile (\p -> p <= up) $ primes
