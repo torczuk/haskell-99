@@ -7,6 +7,7 @@ module  Arithmetic
   primeMultiFactors,
   primeR,
   phi,
+  goldbach,
 ) where
 
 --31. Determine whether a given integer number is prime.
@@ -64,3 +65,8 @@ phi n = foldl formula 1 $ primeMultiFactors n
 -- 39. A list of prime numbers.
 primeR :: Integral a => a -> a -> [a]
 primeR up down = takeWhile (\p -> p <= down) $ dropWhile (\p -> p <= up) $ primes
+
+-- 40. Goldbach's conjecture.
+goldbach :: Int -> (Int, Int)
+goldbach n = head [(p1,p2) | p1 <- primesToN, p2 <- primesToN, p1 + p2 == n]
+            where primesToN = primeR 2 n
