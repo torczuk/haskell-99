@@ -17,7 +17,7 @@ testPrimeMultiFactor = TestCase(assertEqual "prime multi factors of not prime" [
 testPrimeRange = TestCase(assertEqual "prime between 10 and 20" [11,13,17,19] (primeR 10 20))
 testPhi = TestCase(assertEqual "number of coprime with 10 are 4" 4 (phi 10))
 testGoldbach = TestCase(assertEqual "goldbach for 1928 = 61 + 1867" (61, 1867) (goldbach 1928))
-testLists = TestCase(assertEqual "goldbach for between 9 20" [(3,7),(5,7),(3,11),(3,13),(5,13),(3,17)] (goldbachList 9 20))
+testGoldgachLists = TestCase(assertEqual "goldbach for between 9 20" [(3,7),(5,7),(3,11),(3,13),(5,13),(3,17)] (goldbachList 9 20))
 
 tests = TestList [TestLabel "isPrime" testThat2IsPrime, testThat199IsPrime, testThat991IsPrime, testThat993IsNotPrime,
                   TestLabel "gcd" testGCD1, testGCD2,
@@ -28,4 +28,4 @@ tests = TestList [TestLabel "isPrime" testThat2IsPrime, testThat199IsPrime, test
                   TestLabel "primeR" testPrimeRange,
                   TestLabel "phi" testPhi,
                   TestLabel "goldbach" testGoldbach,
-                  TestLabel "goldbachList" testLists]
+                  TestLabel "goldbachList" testGoldgachLists]
