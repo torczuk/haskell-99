@@ -14,6 +14,12 @@ testOrOnTF = TestCase(assertEqual "or True False" True (or' True False))
 testOrOnFT = TestCase(assertEqual "or False True" True (or' False True))
 testOrOnFF = TestCase(assertEqual "or False False" False (or' False False))
 
+testXorOnTT = TestCase(assertEqual "xor True True" False (xor' True True))
+testXorOnTF = TestCase(assertEqual "xor True False" True (xor' True False))
+testXorOnFT = TestCase(assertEqual "xor False True" True (xor' False True))
+testXorOnFF = TestCase(assertEqual "xor False False" False (xor' False False))
+
 tests = TestList [TestLabel "not'" testNotOnTrue, testNotOnFalse,
                   TestLabel "and'" testAndOnTT, testAndOnTF, testAndOnFT, testAndOnFF,
-                  TestLabel "or'" testOrOnTT, testOrOnTF, testOrOnFT, testOrOnFF]
+                  TestLabel "or'" testOrOnTT, testOrOnTF, testOrOnFT, testOrOnFF,
+                  TestLabel "xor'" testOrOnTT, testOrOnTF, testOrOnFT, testOrOnFF]
