@@ -19,7 +19,13 @@ testXorOnTF = TestCase(assertEqual "xor True False" True (xor' True False))
 testXorOnFT = TestCase(assertEqual "xor False True" True (xor' False True))
 testXorOnFF = TestCase(assertEqual "xor False False" False (xor' False False))
 
+testImplOnTT = TestCase(assertEqual "impl True True" True (impl' True True))
+testImplOnTF = TestCase(assertEqual "impl True False" False (impl' True False))
+testImplOnFT = TestCase(assertEqual "impl False True" True (impl' False True))
+testImplOnFF = TestCase(assertEqual "impl False False" True (impl' False False))
+
 tests = TestList [TestLabel "not'" testNotOnTrue, testNotOnFalse,
                   TestLabel "and'" testAndOnTT, testAndOnTF, testAndOnFT, testAndOnFF,
                   TestLabel "or'" testOrOnTT, testOrOnTF, testOrOnFT, testOrOnFF,
-                  TestLabel "xor'" testOrOnTT, testOrOnTF, testOrOnFT, testOrOnFF]
+                  TestLabel "xor'" testXorOnTT, testXorOnTF, testXorOnFT, testXorOnFF,
+                  TestLabel "impl'" testImplOnTT, testImplOnTF, testImplOnFT, testImplOnFF]

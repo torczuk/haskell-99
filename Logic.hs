@@ -3,7 +3,8 @@ module  Logic
   not',
   and',
   or',
-  xor'
+  xor',
+  impl'
 ) where
 
 not' :: Bool -> Bool
@@ -22,3 +23,7 @@ xor' :: Bool -> Bool -> Bool
 xor' True True  = False
 xor' False False = False
 xor' _ _ = True
+
+impl' :: Bool -> Bool -> Bool
+impl' True False = False
+impl' _ _ =  True
