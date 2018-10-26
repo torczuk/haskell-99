@@ -4,7 +4,8 @@ module  Logic
   and',
   or',
   xor',
-  impl'
+  impl',
+  equ',
 ) where
 
 not' :: Bool -> Bool
@@ -27,3 +28,8 @@ xor' _ _ = True
 impl' :: Bool -> Bool -> Bool
 impl' True False = False
 impl' _ _ =  True
+
+equ' :: Bool -> Bool -> Bool
+equ' True True = True
+equ' False False = True
+equ' _ _ = False
