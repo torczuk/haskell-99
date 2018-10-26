@@ -33,3 +33,11 @@ equ' :: Bool -> Bool -> Bool
 equ' True True = True
 equ' False False = True
 equ' _ _ = False
+
+-- 46. Write a predicate table/3 which prints the truth table of a given logical expression in two variables.
+table :: (Bool -> Bool -> Bool) -> IO ()
+table f = putStrLn $ concatMap (++ "\n" ) [show a ++ " " ++ show b ++ " " ++ show (f a b) | a <- [True, False], b <- [True, False]]
+
+-- 47. Truth tables for logical expressions (2).
+infixl 4 `or'`
+infixl 6 `and'`

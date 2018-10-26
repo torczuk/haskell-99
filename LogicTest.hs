@@ -29,9 +29,13 @@ testEquOnTF = TestCase(assertEqual "equ True False" False (equ' True False))
 testEquOnFT = TestCase(assertEqual "equ False True" False (equ' False True))
 testEquOnFF = TestCase(assertEqual "equ False False" True (equ' False False))
 
+testInfixlTrue = TestCase(assertEqual "True and not False" True (True `and'` not' False))
+testInfixlFalse = TestCase(assertEqual "False or not True" False (False `or'` not' True))
+
 tests = TestList [TestLabel "not'" testNotOnTrue, testNotOnFalse,
                   TestLabel "and'" testAndOnTT, testAndOnTF, testAndOnFT, testAndOnFF,
                   TestLabel "or'" testOrOnTT, testOrOnTF, testOrOnFT, testOrOnFF,
                   TestLabel "xor'" testXorOnTT, testXorOnTF, testXorOnFT, testXorOnFF,
                   TestLabel "impl'" testImplOnTT, testImplOnTF, testImplOnFT, testImplOnFF,
-                  TestLabel "impl'" testEquOnTT, testEquOnTF, testEquOnFT, testEquOnFF]
+                  TestLabel "impl'" testEquOnTT, testEquOnTF, testEquOnFT, testEquOnFF,
+                  TestLabel "infix" testInfixlTrue, testInfixlFalse]
