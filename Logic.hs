@@ -1,5 +1,3 @@
-import Control.Monad (replicateM)
-
 module  Logic
 (
   not',
@@ -8,7 +6,10 @@ module  Logic
   xor',
   impl',
   equ',
+  gray,
 ) where
+
+import Control.Monad (replicateM)
 
 not' :: Bool -> Bool
 not' True = False
@@ -49,4 +50,9 @@ tablen :: Int -> ([Bool] -> Bool) -> IO ()
 tablen n f = mapM_ putStrLn [toStr bools ++ " = " ++ show (f bools) | bools <- args n]
   where
     args n = replicateM n [True, False]
-    toStr t = unwords . map (\x -> show x ++ " ") t
+    toStr = unwords . map (\x -> show x ++ " ")
+
+gray :: Int -> [String]
+gray 1 = ["0", "1"]
+gray n = map ("0" ++ ) prev ++ reverse (map ("1" ++ ) prev)
+        where prev = gray (n - 1)

@@ -32,10 +32,13 @@ testEquOnFF = TestCase(assertEqual "equ False False" True (equ' False False))
 testInfixlTrue = TestCase(assertEqual "True and not False" True (True `and'` not' False))
 testInfixlFalse = TestCase(assertEqual "False or not True" False (False `or'` not' True))
 
+testGrayCode = TestCase(assertEqual "should generate 4 lenght gray code" ["000","001","011","010","110","111","101","100"] (gray 3))
+
 tests = TestList [TestLabel "not'" testNotOnTrue, testNotOnFalse,
                   TestLabel "and'" testAndOnTT, testAndOnTF, testAndOnFT, testAndOnFF,
                   TestLabel "or'" testOrOnTT, testOrOnTF, testOrOnFT, testOrOnFF,
                   TestLabel "xor'" testXorOnTT, testXorOnTF, testXorOnFT, testXorOnFF,
                   TestLabel "impl'" testImplOnTT, testImplOnTF, testImplOnFT, testImplOnFF,
                   TestLabel "impl'" testEquOnTT, testEquOnTF, testEquOnFT, testEquOnFF,
-                  TestLabel "infix" testInfixlTrue, testInfixlFalse]
+                  TestLabel "infix" testInfixlTrue, testInfixlFalse,
+                  TestLabel "gray" testGrayCode]
