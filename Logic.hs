@@ -1,3 +1,5 @@
+import Control.Monad (replicateM)
+
 module  Logic
 (
   not',
@@ -41,3 +43,10 @@ table f = putStrLn $ concatMap (++ "\n" ) [show a ++ " " ++ show b ++ " " ++ sho
 -- 47. Truth tables for logical expressions (2).
 infixl 4 `or'`
 infixl 6 `and'`
+
+-- 48. Truth tables for logical expressions (3).
+tablen :: Int -> ([Bool] -> Bool) -> IO ()
+tablen n f = mapM_ putStrLn [toStr bools ++ " = " ++ show (f bools) | bools <- args n]
+  where
+    args n = replicateM n [True, False]
+    toStr t = unwords . map (\x -> show x ++ " ") t
