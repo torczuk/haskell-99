@@ -34,6 +34,9 @@ testInfixlFalse = TestCase(assertEqual "False or not True" False (False `or'` no
 
 testGrayCode = TestCase(assertEqual "should generate 4 lenght gray code" ["000","001","011","010","110","111","101","100"] (gray 3))
 
+huffmanCode = TestCase(assertEqual "should generate huffman codes" [('a',"0"),('b',"101"),('c',"100"),('d',"111"),('e',"1101"),('f',"1100")]
+                                                                        (huffman [('a',45),('b',13),('c',12),('d',16),('e',9),('f',5)]))
+
 tests = TestList [TestLabel "not'" testNotOnTrue, testNotOnFalse,
                   TestLabel "and'" testAndOnTT, testAndOnTF, testAndOnFT, testAndOnFF,
                   TestLabel "or'" testOrOnTT, testOrOnTF, testOrOnFT, testOrOnFF,
@@ -41,4 +44,5 @@ tests = TestList [TestLabel "not'" testNotOnTrue, testNotOnFalse,
                   TestLabel "impl'" testImplOnTT, testImplOnTF, testImplOnFT, testImplOnFF,
                   TestLabel "impl'" testEquOnTT, testEquOnTF, testEquOnFT, testEquOnFF,
                   TestLabel "infix" testInfixlTrue, testInfixlFalse,
-                  TestLabel "gray" testGrayCode]
+                  TestLabel "gray" testGrayCode,
+                  TestLabel "huffman" huffmanCode]
