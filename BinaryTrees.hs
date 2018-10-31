@@ -3,6 +3,7 @@ module Trees
   -- cbalTree,
   insert,
   Tree(Empty, Branch),
+  construct,
 )
 where
 
@@ -24,3 +25,13 @@ insert (Branch i left@(Branch m _ _) right@(Branch n _ _)) e
 
 cbalTree :: Integral a => a -> Tree Char
 cbalTree n = fmap (\t -> 'x') . foldr (\e t -> insert t e) Empty $ [1 .. n]
+
+add :: (Ord n) => Tree n -> n ->  Tree n
+add Empty n = Branch n Empty Empty
+add (Branch m left right) n
+          | m == n = Branch m left right
+          | n < m  = Branch m (add left n) right
+          | n > m  = Branch m left (add right n)
+
+construct :: (Ord n) => [n] -> Tree n
+construct = foldl (\t n -> add t n) Empty
