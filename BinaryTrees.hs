@@ -1,4 +1,4 @@
-module Trees
+module BinaryTrees
 (
   -- cbalTree,
   insert,
