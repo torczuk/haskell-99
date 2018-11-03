@@ -3,7 +3,10 @@ module BinaryTrees
   -- cbalTree,
   insert,
   Tree(Empty, Branch),
+  symetric,
   construct,
+  symetric,
+  testSymetric,
 )
 where
 
@@ -26,6 +29,15 @@ insert (Branch i left@(Branch m _ _) right@(Branch n _ _)) e
 cbalTree :: Integral a => a -> Tree Char
 cbalTree n = fmap (\t -> 'x') . foldr (\e t -> insert t e) Empty $ [1 .. n]
 
+--56. Symmetric binary trees
+symetric :: (Eq n) => Tree n -> Bool
+symetric Empty = True
+symetric (Branch n left right) = (mirror left) == right
+      where
+          mirror Empty = Empty
+          mirror (Branch m l r) = Branch m (mirror r) (mirror l)
+
+--57.  Binary search trees
 add :: (Ord n) => Tree n -> n ->  Tree n
 add Empty n = Branch n Empty Empty
 add (Branch m left right) n
@@ -35,3 +47,6 @@ add (Branch m left right) n
 
 construct :: (Ord n) => [n] -> Tree n
 construct = foldl (\t n -> add t n) Empty
+
+testSymetric :: (Ord n) => [n] -> Bool
+testSymetric = symetric . fmap (\x -> 'x') . construct
