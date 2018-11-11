@@ -1,12 +1,11 @@
 Solving https://wiki.haskell.org/99_questions
 
-Run ghci
+Run ghci in console
 ```
 $> ghci
-...
 ```
 
-To run tests execute inside ghci
+Run tests inside `ghci` for any module
 ```
 λ> :l ListsTest.hs
 ...

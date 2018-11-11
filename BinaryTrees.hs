@@ -7,6 +7,7 @@ module BinaryTrees
   construct,
   symetric,
   testSymetric,
+  symCbalTrees,
 )
 where
 
@@ -50,3 +51,16 @@ construct = foldl (\t n -> add t n) Empty
 
 testSymetric :: (Ord n) => [n] -> Bool
 testSymetric = symetric . fmap (\x -> 'x') . construct
+
+symCbalTrees :: Integral a => a -> [Tree Char]
+symCbalTrees = filter symetric . cbalTree'
+
+cbalTree' :: Integral a => a -> [Tree Char]
+cbalTree' 0 = [Empty]
+cbalTree' 1 = [Branch 'x' Empty Empty]
+cbalTree' n = if n `mod` 2 == 1 then
+             [ Branch 'x' l r | l <- cbalTree' ((n - 1) `div` 2),
+                                r <- cbalTree' ((n - 1) `div` 2) ]
+             else
+             concat [ [Branch 'x' l r, Branch 'x' r l] | l <- cbalTree' ((n - 1) `div` 2),
+                                                         r <- cbalTree' (n `div` 2) ]
