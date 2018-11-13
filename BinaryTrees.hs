@@ -8,6 +8,7 @@ module BinaryTrees
   symetric,
   testSymetric,
   symCbalTrees,
+  countLeaves,
 )
 where
 
@@ -52,6 +53,7 @@ construct = foldl (\t n -> add t n) Empty
 testSymetric :: (Ord n) => [n] -> Bool
 testSymetric = symetric . fmap (\x -> 'x') . construct
 
+--58. All symetric balance tree
 symCbalTrees :: Integral a => a -> [Tree Char]
 symCbalTrees = filter symetric . cbalTree'
 
@@ -64,3 +66,9 @@ cbalTree' n = if n `mod` 2 == 1 then
              else
              concat [ [Branch 'x' l r, Branch 'x' r l] | l <- cbalTree' ((n - 1) `div` 2),
                                                          r <- cbalTree' (n `div` 2) ]
+
+--  61A Count the leaves of a binary tree
+countLeaves :: Tree n -> Int
+countLeaves Empty = 0
+countLeaves (Branch _ Empty Empty) = 1
+countLeaves (Branch _ l r) = countLeaves l + countLeaves r

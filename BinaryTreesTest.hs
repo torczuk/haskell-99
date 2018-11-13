@@ -7,7 +7,11 @@ testBinarySymetric7elements = TestCase (assertEqual "test binary tree symetric [
 testBinarySymetric5elements = TestCase (assertEqual "test binary tree symetric [3, 2, 5, 7, 1]" True (testSymetric [3, 2, 5, 7, 1]))
 testBinarySymetricList = TestCase (assertEqual "test all binary symetric balanced for 5" 2 (length . symCbalTrees $ 5))
 
+tree4 = Branch 1 (Branch 2 Empty (Branch 4 Empty Empty)) (Branch 2 Empty Empty)
+testCountLeafs =  TestCase (assertEqual "leafs size in tree4" 2 (countLeaves tree4))
+
 tests = TestList [TestLabel "construct" testConstruct,
                   TestLabel "symetric" testEmptySymetric,
                   TestLabel "symetric" testBinarySymetric7elements, testBinarySymetric5elements,
-                  TestLabel "symCbalTrees" testBinarySymetricList]
+                  TestLabel "symCbalTrees" testBinarySymetricList,
+                  TestLabel "countLeaves" testCountLeafs]
