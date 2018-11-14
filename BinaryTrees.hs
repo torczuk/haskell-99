@@ -9,6 +9,7 @@ module BinaryTrees
   testSymetric,
   symCbalTrees,
   countLeaves,
+  leaves,
 )
 where
 
@@ -67,8 +68,14 @@ cbalTree' n = if n `mod` 2 == 1 then
              concat [ [Branch 'x' l r, Branch 'x' r l] | l <- cbalTree' ((n - 1) `div` 2),
                                                          r <- cbalTree' (n `div` 2) ]
 
---  61A Count the leaves of a binary tree
+--  61 Count the leaves of a binary tree
 countLeaves :: Tree n -> Int
 countLeaves Empty = 0
 countLeaves (Branch _ Empty Empty) = 1
 countLeaves (Branch _ l r) = countLeaves l + countLeaves r
+
+-- 61A Collect the leaves of a binary tree in a list
+leaves :: Tree n -> [n]
+leaves Empty = []
+leaves (Branch n Empty Empty) = [n]
+leaves (Branch n left right) = (leaves left) ++ (leaves right)
