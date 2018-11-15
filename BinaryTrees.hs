@@ -10,6 +10,7 @@ module BinaryTrees
   symCbalTrees,
   countLeaves,
   leaves,
+  internals,
 )
 where
 
@@ -79,3 +80,8 @@ leaves :: Tree n -> [n]
 leaves Empty = []
 leaves (Branch n Empty Empty) = [n]
 leaves (Branch n left right) = (leaves left) ++ (leaves right)
+
+internals :: Tree n -> [n]
+internals Empty = []
+internals (Branch n Empty Empty) = []
+internals (Branch n left right) = n : (internals left) ++ (internals right)
