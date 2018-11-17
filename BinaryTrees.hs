@@ -12,6 +12,8 @@ module BinaryTrees
   leaves,
   internals,
   atLevel,
+  completeBinaryTree,
+  size,
 )
 where
 
@@ -20,6 +22,10 @@ data Tree a = Empty | Branch a (Tree a) (Tree a) deriving (Show, Eq)
 instance Functor Tree where
   fmap f Empty = Empty
   fmap f (Branch n left right) = Branch (f n) (fmap f left) (fmap f right)
+
+size :: Tree n -> Int
+size Empty = 0
+size (Branch _ l r) = 1 + (size l) + (size r)
 
 --55. Construct completely balanced binary trees
 insert :: (Integral a) => Tree a -> a -> Tree a
@@ -94,3 +100,15 @@ atLevel :: Tree n -> Int -> [n]
 atLevel Empty _ = []
 atLevel (Branch n _ _) 1 = [n]
 atLevel (Branch n left right) level = (atLevel left (level - 1)) ++ (atLevel right (level - 1))
+
+--
+completeBinaryTree' :: Int -> [Int] -> Tree Char
+completeBinaryTree' n x
+        | n <= (length x) = Branch 'x' (completeBinaryTree' indexLeft x) (completeBinaryTree' indexRight x)
+        | otherwise = Empty
+        where
+          indexLeft = n*2
+          indexRight = n*2+1
+
+completeBinaryTree :: Int -> Tree Char
+completeBinaryTree n = completeBinaryTree' 1 [1..n]
