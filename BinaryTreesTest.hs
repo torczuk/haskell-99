@@ -11,6 +11,7 @@ tree4 = Branch 1 (Branch 2 Empty (Branch 4 Empty Empty)) (Branch 2 Empty Empty)
 testCountLeafs =  TestCase (assertEqual "leafs size in tree4" 2 (countLeaves tree4))
 testLeafs =  TestCase (assertEqual "leafs in tree4" [4, 2] (leaves tree4))
 testInternals = TestCase (assertEqual "internals in tree4" [1,2] (internals tree4))
+testAtLevel = TestCase (assertEqual "internals in tree4" [2,2] (atLevel tree4 2))
 
 tests = TestList [TestLabel "construct" testConstruct,
                   TestLabel "symetric" testEmptySymetric,
@@ -18,4 +19,5 @@ tests = TestList [TestLabel "construct" testConstruct,
                   TestLabel "symCbalTrees" testBinarySymetricList,
                   TestLabel "countLeaves" testCountLeafs,
                   TestLabel "leafs" testCountLeafs,
-                  TestLabel "internals" testInternals]
+                  TestLabel "internals" testInternals,
+                  TestLabel "atLevel" testAtLevel]

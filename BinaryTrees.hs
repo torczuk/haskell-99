@@ -11,6 +11,7 @@ module BinaryTrees
   countLeaves,
   leaves,
   internals,
+  atLevel,
 )
 where
 
@@ -81,7 +82,15 @@ leaves Empty = []
 leaves (Branch n Empty Empty) = [n]
 leaves (Branch n left right) = (leaves left) ++ (leaves right)
 
+-- 62. Collect the internal nodes of a binary tree in a list
 internals :: Tree n -> [n]
 internals Empty = []
 internals (Branch n Empty Empty) = []
 internals (Branch n left right) = n : (internals left) ++ (internals right)
+
+
+-- 62B. Collect the nodes at a given level in a list
+atLevel :: Tree n -> Int -> [n]
+atLevel Empty _ = []
+atLevel (Branch n _ _) 1 = [n]
+atLevel (Branch n left right) level = (atLevel left (level - 1)) ++ (atLevel right (level - 1))
