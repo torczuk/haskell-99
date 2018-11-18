@@ -17,11 +17,19 @@ module BinaryTrees
 )
 where
 
-data Tree a = Empty | Branch a (Tree a) (Tree a) deriving (Show, Eq)
+data Tree a = Empty | Branch a (Tree a) (Tree a) deriving (Show)
 
 instance Functor Tree where
   fmap f Empty = Empty
   fmap f (Branch n left right) = Branch (f n) (fmap f left) (fmap f right)
+
+instance (Eq n) => Eq (Tree n) where
+  Empty == Empty = True
+  (Branch n1 l1 r1) == (Branch n2 l2 r2) =
+    n1 == n2 &&
+    l1 == l2 &&
+    r1 == r2
+  _ == _ = False
 
 size :: Tree n -> Int
 size Empty = 0
@@ -101,7 +109,7 @@ atLevel Empty _ = []
 atLevel (Branch n _ _) 1 = [n]
 atLevel (Branch n left right) level = (atLevel left (level - 1)) ++ (atLevel right (level - 1))
 
---
+-- 63. Construct a complete binary tree
 completeBinaryTree' :: Int -> [Int] -> Tree Char
 completeBinaryTree' n x
         | n <= (length x) = Branch 'x' (completeBinaryTree' indexLeft x) (completeBinaryTree' indexRight x)
