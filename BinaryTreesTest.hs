@@ -1,6 +1,7 @@
 import Test.HUnit
 import BinaryTrees
 
+tree2 = Branch 'x' (Branch 'x' Empty Empty) (Branch 'x' Empty Empty)
 tree4 = Branch 1 (Branch 2 Empty (Branch 4 Empty Empty)) (Branch 2 Empty Empty)
 tree4' = Branch 1 (Branch 2 Empty (Branch 4 Empty Empty)) (Branch 2 Empty Empty)
 
@@ -14,6 +15,7 @@ testCountLeafs =  TestCase (assertEqual "leafs size in tree4" 2 (countLeaves tre
 testLeafs =  TestCase (assertEqual "leafs in tree4" [4, 2] (leaves tree4))
 testInternals = TestCase (assertEqual "internals in tree4" [1,2] (internals tree4))
 testAtLevel = TestCase (assertEqual "internals in tree4" [2,2] (atLevel tree4 2))
+testIsCompleteBinaryTree = TestCase (assertEqual "is complete binary tree" True (isCompleteBinaryTree tree2))
 
 tests = TestList [TestLabel "eq" testEq,
                   TestLabel "construct" testConstruct,
@@ -23,4 +25,5 @@ tests = TestList [TestLabel "eq" testEq,
                   TestLabel "countLeaves" testCountLeafs,
                   TestLabel "leafs" testCountLeafs,
                   TestLabel "internals" testInternals,
-                  TestLabel "atLevel" testAtLevel]
+                  TestLabel "atLevel" testAtLevel,
+                  TestLabel "isCompleteBinaryTree" testIsCompleteBinaryTree]

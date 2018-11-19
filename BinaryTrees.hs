@@ -13,6 +13,7 @@ module BinaryTrees
   internals,
   atLevel,
   completeBinaryTree,
+  isCompleteBinaryTree,
   size,
 )
 where
@@ -119,4 +120,8 @@ completeBinaryTree' n x
           indexRight = n*2+1
 
 completeBinaryTree :: Int -> Tree Char
+completeBinaryTree 0 = Empty
 completeBinaryTree n = completeBinaryTree' 1 [1..n]
+
+isCompleteBinaryTree :: Tree Char -> Bool
+isCompleteBinaryTree tree = (completeBinaryTree $ size tree) == tree
